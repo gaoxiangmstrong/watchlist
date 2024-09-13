@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
+from faker import Faker
 
+fake = Faker()
 # 加载flask环境
 load_dotenv(".flaskenv")
 
@@ -20,12 +22,19 @@ movies = [
     {'title': 'WALL-E', 'year': '2008'},
     {'title': 'The Pork of Music', 'year': '2012'},
 ]
+
+actors = [{"name":fake.name(), "address": fake.address()} for _ in range(10)]
+
+  
 numbers = [1, 2,3,4,5 ,6, 7]
 
 @app.route("/")
 def index():
   return render_template("index.html", name=name, movies=movies, age=age, numbers=numbers)
 
+@app.route("/actor")
+def actor():
+  return render_template("actor.html", actors=actors)
 
 @app.route("/test")
 def test():

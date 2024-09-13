@@ -3,23 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <title>{{ name }}'s Watchlist</title>
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+      type="text/css"
+    />
   </head>
   <body>
-    <h2>{{ name }}'s Watchlist</h2>
-    <p>{{ name}} is {{ age }} years old</p>
+    <h2>
+      <img
+        alt="Avatar"
+        src="{{url_for('static', filename='images/avatar.png')}}"
+        class="avatar"
+      />
+      {{ name }}'s Watchlist
+    </h2>
 
     {# 使用 length 过滤器获取 movies 变量的长度 #}
     <p>{{ movies|length }} Titles</p>
-    <ul>
+    <ul class="movie-list">
       {% for movie in movies %}
       <li>{{ movie.title }} - {{ movie.year }}</li>
       {% endfor %}
     </ul>
-    <ul>
-      {% for number in numbers %}
-      <li>{{number}}</li>
-      {%endfor%}
-    </ul>
+    <img
+      alt="Totoro"
+      class="totoro"
+      src="{{url_for('static', filename='images/totoro.gif')}}"
+    />
 
     <footer>
       <small

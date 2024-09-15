@@ -56,11 +56,20 @@ actors = [{"name":fake.name(), "address": fake.address()} for _ in range(10)]
   
 numbers = [1, 2,3,4,5 ,6, 7]
 
+
+@app.context_processor
+def inject_user():
+  user = User.query.first()
+  return dict(user=user) 
+
+@app.errorhandler(404)
+def page_not_found(e):
+  return render_template('404.html'), 404
+
 @app.route("/")
 def index():
   user = User.query.first()
   movies = Movie.query.all()
-
   return render_template("index.html",user=user, movies=movies)
 
 @app.route("/actor")
@@ -70,3 +79,6 @@ def actor():
 @app.route("/test")
 def test():
   return '<h1>这个页面是用来做测试的</h1>'
+
+
+
